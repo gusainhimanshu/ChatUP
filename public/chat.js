@@ -8,11 +8,12 @@ window.onload = function() {
 	
 	
 	socket.on('message', function(data) {
-		if(data.message){
+	if(data.message){
 			messages.push(data.message);
+			messages.push(data.username);
 			var html = '';
-			for(var i = 0; i<messages.length; i++ ){
-				html += '<b>' + (data.username ? data.username:'Server') + '</b>'+ " " ;
+			for(var i = 0; i<messages.length; i=i+2 ){
+				html += '<b>' + (messages[i+1] ? messages[i+1]:'Server') + '</b>'+ " " ;
 				if(!(messages[i].message)){
 					html += messages[i] + '<br/>';
 				} else{
@@ -38,6 +39,7 @@ window.onload = function() {
 $(document).ready(function(){
 	$("#field").keyup(function(e){
 		if(e.keycode == 13){
+			alert("test");
 			sendMessage();
 		}
 	});
